@@ -35,7 +35,7 @@ async function http(path, options = {}) {
 // PUBLIC_INTERFACE
 export async function getTodos() {
   /** Fetch all todos from the backend */
-  return http('/todos', { method: 'GET' });
+  return http('/api/todos', { method: 'GET' });
 }
 
 // PUBLIC_INTERFACE
@@ -43,7 +43,7 @@ export async function createTodo(payload) {
   /** Create a new todo
    * payload: { title: string, description?: string }
    */
-  return http('/todos', { method: 'POST', body: JSON.stringify(payload) });
+  return http('/api/todos', { method: 'POST', body: JSON.stringify(payload) });
 }
 
 // PUBLIC_INTERFACE
@@ -51,17 +51,22 @@ export async function updateTodo(id, payload) {
   /** Update an existing todo by id
    * payload: { title?: string, description?: string, completed?: boolean }
    */
-  return http(`/todos/${id}`, { method: 'PUT', body: JSON.stringify(payload) });
+  return http(`/api/todos/${id}`, { method: 'PUT', body: JSON.stringify(payload) });
 }
 
 // PUBLIC_INTERFACE
 export async function deleteTodo(id) {
   /** Delete a todo by id */
-  return http(`/todos/${id}`, { method: 'DELETE' });
+  return http(`/api/todos/${id}`, { method: 'DELETE' });
 }
 
 // PUBLIC_INTERFACE
 export async function toggleComplete(id, completed) {
-  /** Toggle a todo's completion status */
-  return http(`/todos/${id}`, { method: 'PATCH', body: JSON.stringify({ completed }) });
+  /** Toggle a todo's completion status 
+   * Backend exposes /api/todos/{id}/toggle (no request body required)
+   */
+  if (typeof completed === 'boolean') {
+    // Fallback: If backend later supports body-based PATCH, keep this for compatibility
+  }
+  return http(`/api/todos/${id}/toggle`, { method: 'PATCH' });
 }

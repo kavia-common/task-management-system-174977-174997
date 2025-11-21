@@ -18,6 +18,12 @@ In the project directory, you can run:
 Runs the app in development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
+By default, the frontend calls the backend at `http://localhost:3001`. To target a different backend URL, set:
+- macOS/Linux: `export REACT_APP_API_BASE_URL="http://localhost:3001"`
+- Windows (Powershell): `$env:REACT_APP_API_BASE_URL="http://localhost:3001"`
+
+Ensure the backend enables CORS for `http://localhost:3000` (this template currently allows all origins for development).
+
 ### `npm test`
 
 Launches the test runner in interactive watch mode.
@@ -31,17 +37,7 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 ### Colors
 
-The main brand colors are defined as CSS variables in `src/App.css`:
-
-```css
-:root {
-  --kavia-orange: #E87A41;
-  --kavia-dark: #1A1A1A;
-  --text-color: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(255, 255, 255, 0.1);
-}
-```
+The main brand colors are defined as CSS variables in `src/App.css`.
 
 ### Components
 
